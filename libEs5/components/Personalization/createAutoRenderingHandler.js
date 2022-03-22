@@ -4,6 +4,8 @@ exports.default = void 0;
 
 var _addRenderAttemptedToDecisions = require("./utils/addRenderAttemptedToDecisions");
 
+var _isNonEmptyArray = require("../../utils/isNonEmptyArray");
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -16,49 +18,74 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-var _default = function _default(_ref) {
+var getPropositions = function getPropositions(_ref) {
   var viewCache = _ref.viewCache,
-      executeDecisions = _ref.executeDecisions,
-      executeCachedViewDecisions = _ref.executeCachedViewDecisions,
-      showContainers = _ref.showContainers;
-  return function (_ref2) {
-    var viewName = _ref2.viewName,
-        pageWideScopeDecisions = _ref2.pageWideScopeDecisions,
-        nonAutoRenderableDecisions = _ref2.nonAutoRenderableDecisions;
+      viewName = _ref.viewName,
+      pageWideScopeDecisions = _ref.pageWideScopeDecisions;
 
-    if (viewName) {
-      return viewCache.getView(viewName).then(function (currentViewDecisions) {
-        executeDecisions(pageWideScopeDecisions);
-        executeCachedViewDecisions({
-          viewName: viewName,
-          viewDecisions: currentViewDecisions
-        });
-        showContainers();
-        return {
-          decisions: _toConsumableArray(nonAutoRenderableDecisions),
-          propositions: [].concat(_toConsumableArray((0, _addRenderAttemptedToDecisions.default)({
-            decisions: [].concat(_toConsumableArray(pageWideScopeDecisions), _toConsumableArray(currentViewDecisions)),
-            renderAttempted: true
-          })), _toConsumableArray((0, _addRenderAttemptedToDecisions.default)({
-            decisions: nonAutoRenderableDecisions,
-            renderAttempted: false
-          })))
-        };
-      });
-    }
-
-    executeDecisions(pageWideScopeDecisions);
-    showContainers();
+  if (!viewName) {
     return {
-      decisions: _toConsumableArray(nonAutoRenderableDecisions),
-      propositions: [].concat(_toConsumableArray((0, _addRenderAttemptedToDecisions.default)({
-        decisions: pageWideScopeDecisions,
-        renderAttempted: true
-      })), _toConsumableArray((0, _addRenderAttemptedToDecisions.default)({
-        decisions: nonAutoRenderableDecisions,
-        renderAttempted: false
-      })))
+      pageWideScopeDecisions: pageWideScopeDecisions,
+      viewPropositions: []
     };
+  }
+
+  return viewCache.getView(viewName).then(function (viewPropositions) {
+    return {
+      pageWideScopeDecisions: pageWideScopeDecisions,
+      viewPropositions: viewPropositions
+    };
+  });
+};
+
+var _default = function _default(_ref2) {
+  var viewCache = _ref2.viewCache,
+      executeDecisions = _ref2.executeDecisions,
+      showContainers = _ref2.showContainers,
+      collect = _ref2.collect;
+  return function (_ref3) {
+    var viewName = _ref3.viewName,
+        pageWideScopeDecisions = _ref3.pageWideScopeDecisions,
+        nonAutoRenderableDecisions = _ref3.nonAutoRenderableDecisions;
+    return Promise.resolve(pageWideScopeDecisions).then(function (propositions) {
+      return getPropositions({
+        viewCache: viewCache,
+        viewName: viewName,
+        executeDecisions: executeDecisions,
+        pageWideScopeDecisions: propositions
+      });
+    }).then(function (propositions) {
+      executeDecisions(propositions.pageWideScopeDecisions).then(function (decisionsMeta) {
+        if ((0, _isNonEmptyArray.default)(decisionsMeta)) {
+          collect({
+            decisionsMeta: decisionsMeta
+          });
+        }
+      });
+
+      if (viewName) {
+        executeDecisions(propositions.viewPropositions).then(function (decisionsMeta) {
+          collect({
+            decisionsMeta: decisionsMeta,
+            viewName: viewName
+          });
+        });
+      }
+
+      showContainers();
+      return [].concat(_toConsumableArray(propositions.pageWideScopeDecisions), _toConsumableArray(propositions.viewPropositions));
+    }).then(function (renderablePropositions) {
+      return {
+        decisions: _toConsumableArray(nonAutoRenderableDecisions),
+        propositions: [].concat(_toConsumableArray((0, _addRenderAttemptedToDecisions.default)({
+          decisions: renderablePropositions,
+          renderAttempted: true
+        })), _toConsumableArray((0, _addRenderAttemptedToDecisions.default)({
+          decisions: nonAutoRenderableDecisions,
+          renderAttempted: false
+        })))
+      };
+    });
   };
 };
 

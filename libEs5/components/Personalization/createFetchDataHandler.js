@@ -16,15 +16,13 @@ governing permissions and limitations under the License.
 var _default = function _default(_ref) {
   var config = _ref.config,
       responseHandler = _ref.responseHandler,
-      showContainers = _ref.showContainers,
       hideContainers = _ref.hideContainers,
       mergeQuery = _ref.mergeQuery;
   return function (_ref2) {
     var decisionsDeferred = _ref2.decisionsDeferred,
         personalizationDetails = _ref2.personalizationDetails,
         event = _ref2.event,
-        onResponse = _ref2.onResponse,
-        onRequestFailure = _ref2.onRequestFailure;
+        onResponse = _ref2.onResponse;
     var prehidingStyle = config.prehidingStyle;
 
     if (personalizationDetails.isRenderDecisions()) {
@@ -39,10 +37,6 @@ var _default = function _default(_ref) {
         personalizationDetails: personalizationDetails,
         response: response
       });
-    });
-    onRequestFailure(function () {
-      decisionsDeferred.reject();
-      showContainers();
     });
   };
 };

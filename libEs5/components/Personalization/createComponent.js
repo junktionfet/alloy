@@ -26,7 +26,8 @@ var _default = function _default(_ref) {
       onClickHandler = _ref.onClickHandler,
       isAuthoringModeEnabled = _ref.isAuthoringModeEnabled,
       mergeQuery = _ref.mergeQuery,
-      viewCache = _ref.viewCache;
+      viewCache = _ref.viewCache,
+      showContainers = _ref.showContainers;
   return {
     lifecycle: {
       onBeforeEvent: function onBeforeEvent(_ref2) {
@@ -38,6 +39,15 @@ var _default = function _default(_ref) {
             onResponse = _ref2$onResponse === void 0 ? _utils.noop : _ref2$onResponse,
             _ref2$onRequestFailur = _ref2.onRequestFailure,
             onRequestFailure = _ref2$onRequestFailur === void 0 ? _utils.noop : _ref2$onRequestFailur;
+        // Include propositions on all responses, overridden with data as needed
+        onResponse(function () {
+          return {
+            propositions: []
+          };
+        });
+        onRequestFailure(function () {
+          return showContainers();
+        });
 
         if (isAuthoringModeEnabled()) {
           logger.warn(_loggerMessage.AUTHORING_ENABLED); // If we are in authoring mode we disable personalization
@@ -58,19 +68,23 @@ var _default = function _default(_ref) {
         if (personalizationDetails.shouldFetchData()) {
           var decisionsDeferred = (0, _utils.defer)();
           viewCache.storeViews(decisionsDeferred.promise);
+          onRequestFailure(function () {
+            return decisionsDeferred.reject();
+          });
           fetchDataHandler({
             decisionsDeferred: decisionsDeferred,
             personalizationDetails: personalizationDetails,
             event: event,
-            onResponse: onResponse,
-            onRequestFailure: onRequestFailure
+            onResponse: onResponse
           });
           return;
         }
 
         if (personalizationDetails.shouldUseCachedData()) {
-          viewChangeHandler({
+          // eslint-disable-next-line consistent-return
+          return viewChangeHandler({
             personalizationDetails: personalizationDetails,
+            event: event,
             onResponse: onResponse,
             onRequestFailure: onRequestFailure
           });

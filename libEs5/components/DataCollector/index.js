@@ -16,16 +16,14 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 var createDataCollector = function createDataCollector(_ref) {
-  var eventManager = _ref.eventManager,
-      logger = _ref.logger;
+  var eventManager = _ref.eventManager;
   return {
     commands: {
       sendEvent: {
-        documentationUri: "https://adobe.ly/2r0uUjh",
+        documentationUri: "https://adobe.ly/3GQ3Q7t",
         optionsValidator: function optionsValidator(options) {
           return (0, _validateUserEventOptions.default)({
-            options: options,
-            logger: logger
+            options: options
           });
         },
         run: function run(options) {

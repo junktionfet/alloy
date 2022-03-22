@@ -10,6 +10,8 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 import { isNonEmptyArray } from "../../utils";
+import { INTERACT } from "./constants/eventType";
+import PAGE_WIDE_SCOPE from "./constants/scope";
 export default (({
   mergeDecisionsMeta,
   collectClicks,
@@ -27,9 +29,20 @@ export default (({
       const decisionsMeta = collectClicks(clickedElement, selectors, getClickMetasBySelector);
 
       if (isNonEmptyArray(decisionsMeta)) {
-        event.mergeXdm({
-          eventType: "click"
-        });
+        const xdm = {
+          eventType: INTERACT
+        };
+        const scope = decisionsMeta[0].scope;
+
+        if (scope !== PAGE_WIDE_SCOPE) {
+          xdm.web = {
+            webPageDetails: {
+              viewName: scope
+            }
+          };
+        }
+
+        event.mergeXdm(xdm);
         mergeDecisionsMeta(event, decisionsMeta);
       }
     }

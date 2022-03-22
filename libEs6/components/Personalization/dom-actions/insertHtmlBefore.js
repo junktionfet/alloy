@@ -23,6 +23,6 @@ export default ((container, html) => {
   elements.forEach(element => {
     insertBefore(container, element);
   });
-  executeInlineScripts(container, scripts, insertBefore);
+  executeInlineScripts(container, scripts);
   return executeRemoteScripts(scriptsUrls);
 });

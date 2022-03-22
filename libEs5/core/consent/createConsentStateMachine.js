@@ -1,6 +1,6 @@
 "use strict";
 
-exports.default = exports.CONSENT_SOURCE_NEW = exports.CONSENT_SOURCE_INITIAL = exports.CONSENT_SOURCE_DEFAULT = exports.DECLINED_CONSENT_ERROR_CODE = exports.DECLINED_CONSENT = void 0;
+exports.default = exports.DECLINED_CONSENT_ERROR_CODE = exports.DECLINED_CONSENT = exports.CONSENT_SOURCE_NEW = exports.CONSENT_SOURCE_INITIAL = exports.CONSENT_SOURCE_DEFAULT = void 0;
 
 var _utils = require("../../utils");
 

@@ -2,7 +2,7 @@
 
 exports.default = void 0;
 
-var _createRequest = require("../../../core/edgeNetwork/requests/createRequest");
+var _request = require("../../../utils/request");
 
 /*
 Copyright 2020 Adobe. All rights reserved.
@@ -16,7 +16,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 var _default = function _default(identityRequestPayload) {
-  return (0, _createRequest.default)({
+  return (0, _request.createRequest)({
     payload: identityRequestPayload,
     getAction: function getAction() {
       return "identity/acquire";

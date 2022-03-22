@@ -36,10 +36,10 @@ Object.defineProperty(exports, "cookieJar", {
     return _cookieJar.default;
   }
 });
-Object.defineProperty(exports, "createMerger", {
+Object.defineProperty(exports, "crc32", {
   enumerable: true,
   get: function get() {
-    return _createMerger.default;
+    return _crc.default;
   }
 });
 Object.defineProperty(exports, "createCallbackAggregator", {
@@ -48,28 +48,28 @@ Object.defineProperty(exports, "createCallbackAggregator", {
     return _createCallbackAggregator.default;
   }
 });
+Object.defineProperty(exports, "createMerger", {
+  enumerable: true,
+  get: function get() {
+    return _createMerger.default;
+  }
+});
 Object.defineProperty(exports, "createTaskQueue", {
   enumerable: true,
   get: function get() {
     return _createTaskQueue.default;
   }
 });
-Object.defineProperty(exports, "crc32", {
+Object.defineProperty(exports, "deepAssign", {
   enumerable: true,
   get: function get() {
-    return _crc.default;
+    return _deepAssign.default;
   }
 });
 Object.defineProperty(exports, "defer", {
   enumerable: true,
   get: function get() {
     return _defer.default;
-  }
-});
-Object.defineProperty(exports, "deepAssign", {
-  enumerable: true,
-  get: function get() {
-    return _deepAssign.default;
   }
 });
 Object.defineProperty(exports, "endsWith", {
@@ -180,6 +180,12 @@ Object.defineProperty(exports, "isNamespacedCookieName", {
     return _isNamespacedCookieName.default;
   }
 });
+Object.defineProperty(exports, "isNil", {
+  enumerable: true,
+  get: function get() {
+    return _isNil.default;
+  }
+});
 Object.defineProperty(exports, "isNonEmptyArray", {
   enumerable: true,
   get: function get() {
@@ -190,12 +196,6 @@ Object.defineProperty(exports, "isNonEmptyString", {
   enumerable: true,
   get: function get() {
     return _isNonEmptyString.default;
-  }
-});
-Object.defineProperty(exports, "isNil", {
-  enumerable: true,
-  get: function get() {
-    return _isNil.default;
   }
 });
 Object.defineProperty(exports, "isNumber", {
@@ -282,16 +282,16 @@ Object.defineProperty(exports, "toISOStringLocal", {
     return _toISOStringLocal.default;
   }
 });
-Object.defineProperty(exports, "uuid", {
-  enumerable: true,
-  get: function get() {
-    return _uuid.default;
-  }
-});
 Object.defineProperty(exports, "updateErrorMessage", {
   enumerable: true,
   get: function get() {
     return _updateErrorMessage.default;
+  }
+});
+Object.defineProperty(exports, "uuid", {
+  enumerable: true,
+  get: function get() {
+    return _uuid.default;
   }
 });
 Object.defineProperty(exports, "validateIdentityMap", {

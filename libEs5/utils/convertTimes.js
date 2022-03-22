@@ -1,6 +1,6 @@
 "use strict";
 
-exports.default = exports.YEAR = exports.MONTH = exports.WEEK = exports.DAY = exports.HOUR = exports.MINUTE = exports.SECOND = exports.MILLISECOND = void 0;
+exports.default = exports.YEAR = exports.WEEK = exports.SECOND = exports.MONTH = exports.MINUTE = exports.MILLISECOND = exports.HOUR = exports.DAY = void 0;
 
 /*
 Copyright 2019 Adobe. All rights reserved.

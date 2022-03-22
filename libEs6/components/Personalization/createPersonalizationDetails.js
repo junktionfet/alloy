@@ -11,7 +11,7 @@ governing permissions and limitations under the License.
 */
 import { includes } from "../../utils";
 import PAGE_WIDE_SCOPE from "./constants/scope";
-import { DOM_ACTION, HTML_CONTENT_ITEM, JSON_CONTENT_ITEM, REDIRECT_ITEM } from "./constants/schema";
+import { DEFAULT_CONTENT_ITEM, DOM_ACTION, HTML_CONTENT_ITEM, JSON_CONTENT_ITEM, REDIRECT_ITEM } from "./constants/schema";
 import isNonEmptyString from "../../utils/isNonEmptyString";
 export default (({
   renderDecisions,
@@ -44,7 +44,7 @@ export default (({
         scopes.push(PAGE_WIDE_SCOPE);
       }
 
-      const schemas = [HTML_CONTENT_ITEM, JSON_CONTENT_ITEM, REDIRECT_ITEM];
+      const schemas = [DEFAULT_CONTENT_ITEM, HTML_CONTENT_ITEM, JSON_CONTENT_ITEM, REDIRECT_ITEM];
 
       if (includes(scopes, PAGE_WIDE_SCOPE)) {
         schemas.push(DOM_ACTION);

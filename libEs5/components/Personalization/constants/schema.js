@@ -1,6 +1,6 @@
 "use strict";
 
-exports.REDIRECT_ITEM = exports.JSON_CONTENT_ITEM = exports.HTML_CONTENT_ITEM = exports.DOM_ACTION = void 0;
+exports.REDIRECT_ITEM = exports.JSON_CONTENT_ITEM = exports.HTML_CONTENT_ITEM = exports.DOM_ACTION = exports.DEFAULT_CONTENT_ITEM = void 0;
 
 /*
 Copyright 2019 Adobe. All rights reserved.
@@ -13,6 +13,8 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
+var DEFAULT_CONTENT_ITEM = "https://ns.adobe.com/personalization/default-content-item";
+exports.DEFAULT_CONTENT_ITEM = DEFAULT_CONTENT_ITEM;
 var DOM_ACTION = "https://ns.adobe.com/personalization/dom-action";
 exports.DOM_ACTION = DOM_ACTION;
 var HTML_CONTENT_ITEM = "https://ns.adobe.com/personalization/html-content-item";

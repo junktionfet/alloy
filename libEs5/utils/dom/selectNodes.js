@@ -2,7 +2,11 @@
 
 exports.default = void 0;
 
-var _toArray = require("../toArray");
+var _querySelectorAll = require("./querySelectorAll");
+
+var _selectNodesWithShadow = require("./selectNodesWithShadow");
+
+var _isShadowSelector = require("./isShadowSelector");
 
 /*
 Copyright 2019 Adobe. All rights reserved.
@@ -24,7 +28,12 @@ governing permissions and limitations under the License.
  */
 var _default = function _default(selector) {
   var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
-  return (0, _toArray.default)(context.querySelectorAll(selector));
+
+  if (!(0, _isShadowSelector.default)(selector)) {
+    return (0, _querySelectorAll.default)(context, selector);
+  }
+
+  return (0, _selectNodesWithShadow.default)(context, selector);
 };
 
 exports.default = _default;

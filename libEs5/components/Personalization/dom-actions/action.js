@@ -1,69 +1,9 @@
 "use strict";
 
-Object.defineProperty(exports, "setText", {
-  enumerable: true,
-  get: function get() {
-    return _setText.default;
-  }
-});
-Object.defineProperty(exports, "setHtml", {
-  enumerable: true,
-  get: function get() {
-    return _setHtml.default;
-  }
-});
 Object.defineProperty(exports, "appendHtml", {
   enumerable: true,
   get: function get() {
     return _appendHtml.default;
-  }
-});
-Object.defineProperty(exports, "prependHtml", {
-  enumerable: true,
-  get: function get() {
-    return _prependHtml.default;
-  }
-});
-Object.defineProperty(exports, "replaceHtml", {
-  enumerable: true,
-  get: function get() {
-    return _replaceHtml.default;
-  }
-});
-Object.defineProperty(exports, "insertHtmlBefore", {
-  enumerable: true,
-  get: function get() {
-    return _insertHtmlBefore.default;
-  }
-});
-Object.defineProperty(exports, "insertHtmlAfter", {
-  enumerable: true,
-  get: function get() {
-    return _insertHtmlAfter.default;
-  }
-});
-Object.defineProperty(exports, "setStyles", {
-  enumerable: true,
-  get: function get() {
-    return _setStyles.default;
-  }
-});
-Object.defineProperty(exports, "setAttributes", {
-  enumerable: true,
-  get: function get() {
-    return _setAttributes.default;
-  }
-});
-Object.defineProperty(exports, "swapImage", {
-  enumerable: true,
-  get: function get() {
-    return _swapImage.default;
-  }
-});
-Object.defineProperty(exports, "rearrangeChildren", {
-  enumerable: true,
-  get: function get() {
-    return _rearrangeChildren.default;
   }
 });
 Object.defineProperty(exports, "click", {
@@ -73,6 +13,66 @@ Object.defineProperty(exports, "click", {
   }
 });
 exports.createAction = void 0;
+Object.defineProperty(exports, "insertHtmlAfter", {
+  enumerable: true,
+  get: function get() {
+    return _insertHtmlAfter.default;
+  }
+});
+Object.defineProperty(exports, "insertHtmlBefore", {
+  enumerable: true,
+  get: function get() {
+    return _insertHtmlBefore.default;
+  }
+});
+Object.defineProperty(exports, "prependHtml", {
+  enumerable: true,
+  get: function get() {
+    return _prependHtml.default;
+  }
+});
+Object.defineProperty(exports, "rearrangeChildren", {
+  enumerable: true,
+  get: function get() {
+    return _rearrangeChildren.default;
+  }
+});
+Object.defineProperty(exports, "replaceHtml", {
+  enumerable: true,
+  get: function get() {
+    return _replaceHtml.default;
+  }
+});
+Object.defineProperty(exports, "setAttributes", {
+  enumerable: true,
+  get: function get() {
+    return _setAttributes.default;
+  }
+});
+Object.defineProperty(exports, "setHtml", {
+  enumerable: true,
+  get: function get() {
+    return _setHtml.default;
+  }
+});
+Object.defineProperty(exports, "setStyles", {
+  enumerable: true,
+  get: function get() {
+    return _setStyles.default;
+  }
+});
+Object.defineProperty(exports, "setText", {
+  enumerable: true,
+  get: function get() {
+    return _setText.default;
+  }
+});
+Object.defineProperty(exports, "swapImage", {
+  enumerable: true,
+  get: function get() {
+    return _swapImage.default;
+  }
+});
 
 var _dom = require("../../../utils/dom");
 

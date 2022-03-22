@@ -19,7 +19,8 @@ export default (({
   onClickHandler,
   isAuthoringModeEnabled,
   mergeQuery,
-  viewCache
+  viewCache,
+  showContainers
 }) => {
   return {
     lifecycle: {
@@ -30,6 +31,12 @@ export default (({
         onResponse = noop,
         onRequestFailure = noop
       }) {
+        // Include propositions on all responses, overridden with data as needed
+        onResponse(() => ({
+          propositions: []
+        }));
+        onRequestFailure(() => showContainers());
+
         if (isAuthoringModeEnabled()) {
           logger.warn(AUTHORING_ENABLED); // If we are in authoring mode we disable personalization
 
@@ -49,19 +56,21 @@ export default (({
         if (personalizationDetails.shouldFetchData()) {
           const decisionsDeferred = defer();
           viewCache.storeViews(decisionsDeferred.promise);
+          onRequestFailure(() => decisionsDeferred.reject());
           fetchDataHandler({
             decisionsDeferred,
             personalizationDetails,
             event,
-            onResponse,
-            onRequestFailure
+            onResponse
           });
           return;
         }
 
         if (personalizationDetails.shouldUseCachedData()) {
-          viewChangeHandler({
+          // eslint-disable-next-line consistent-return
+          return viewChangeHandler({
             personalizationDetails,
+            event,
             onResponse,
             onRequestFailure
           });

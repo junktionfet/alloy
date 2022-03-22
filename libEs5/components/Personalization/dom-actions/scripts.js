@@ -1,6 +1,6 @@
 "use strict";
 
-exports.executeRemoteScripts = exports.executeInlineScripts = exports.getRemoteScriptsUrls = exports.getInlineScripts = exports.is = void 0;
+exports.is = exports.getRemoteScriptsUrls = exports.getInlineScripts = exports.executeRemoteScripts = exports.executeInlineScripts = void 0;
 
 var _reactorLoadScript = require("@adobe/reactor-load-script");
 
@@ -8,11 +8,13 @@ var _dom = require("../../../utils/dom");
 
 var _tagName = require("../../../constants/tagName");
 
+var _elementAttribute = require("../../../constants/elementAttribute");
+
 var _dom2 = require("./dom");
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -23,11 +25,11 @@ var is = function is(element, tagName) {
 exports.is = is;
 
 var isInlineScript = function isInlineScript(element) {
-  return is(element, _tagName.SCRIPT) && !(0, _dom2.getAttribute)(element, _tagName.SRC);
+  return is(element, _tagName.SCRIPT) && !(0, _dom2.getAttribute)(element, _elementAttribute.SRC);
 };
 
 var isRemoteScript = function isRemoteScript(element) {
-  return is(element, _tagName.SCRIPT) && (0, _dom2.getAttribute)(element, _tagName.SRC);
+  return is(element, _tagName.SCRIPT) && (0, _dom2.getAttribute)(element, _elementAttribute.SRC);
 };
 
 var getInlineScripts = function getInlineScripts(fragment) {
@@ -80,7 +82,7 @@ var getRemoteScriptsUrls = function getRemoteScriptsUrls(fragment) {
       continue;
     }
 
-    var url = (0, _dom2.getAttribute)(element, _tagName.SRC);
+    var url = (0, _dom2.getAttribute)(element, _elementAttribute.SRC);
 
     if (!url) {
       continue;
@@ -96,9 +98,10 @@ var getRemoteScriptsUrls = function getRemoteScriptsUrls(fragment) {
 
 exports.getRemoteScriptsUrls = getRemoteScriptsUrls;
 
-var executeInlineScripts = function executeInlineScripts(container, scripts, func) {
+var executeInlineScripts = function executeInlineScripts(parent, scripts) {
   scripts.forEach(function (script) {
-    return func(container, script);
+    parent.appendChild(script);
+    parent.removeChild(script);
   });
 };
 

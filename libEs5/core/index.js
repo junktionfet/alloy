@@ -52,9 +52,7 @@ var _createEventManager = require("./createEventManager");
 
 var _createCookieTransfer = require("./createCookieTransfer");
 
-var _createDataCollectionRequestPayload = require("./edgeNetwork/requests/createDataCollectionRequestPayload");
-
-var _createDataCollectionRequest = require("./edgeNetwork/requests/createDataCollectionRequest");
+var _request = require("../utils/request");
 
 var _injectSendEdgeNetworkRequest = require("./edgeNetwork/injectSendEdgeNetworkRequest");
 
@@ -168,8 +166,8 @@ var createExecuteCommand = function createExecuteCommand(_ref) {
       lifecycle: lifecycle,
       consent: consent,
       createEvent: _createEvent.default,
-      createDataCollectionRequestPayload: _createDataCollectionRequestPayload.default,
-      createDataCollectionRequest: _createDataCollectionRequest.default,
+      createDataCollectionRequestPayload: _request.createDataCollectionRequestPayload,
+      createDataCollectionRequest: _request.createDataCollectionRequest,
       sendEdgeNetworkRequest: sendEdgeNetworkRequest
     });
     return (0, _initializeComponents.default)({

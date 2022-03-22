@@ -6,10 +6,22 @@ Object.defineProperty(exports, "createFragment", {
     return _createFragment.default;
   }
 });
-Object.defineProperty(exports, "selectNodesWithEq", {
+Object.defineProperty(exports, "getAttribute", {
   enumerable: true,
   get: function get() {
-    return _selectNodesWithEq.selectNodesWithEq;
+    return _getAttribute.default;
+  }
+});
+Object.defineProperty(exports, "getChildNodes", {
+  enumerable: true,
+  get: function get() {
+    return _getChildNodes.default;
+  }
+});
+Object.defineProperty(exports, "getChildren", {
+  enumerable: true,
+  get: function get() {
+    return _getChildren.default;
   }
 });
 Object.defineProperty(exports, "getElementById", {
@@ -18,28 +30,22 @@ Object.defineProperty(exports, "getElementById", {
     return _getElementById.default;
   }
 });
-Object.defineProperty(exports, "setAttribute", {
+Object.defineProperty(exports, "getFirstChild", {
   enumerable: true,
   get: function get() {
-    return _setAttribute.default;
+    return _getFirstChild.default;
   }
 });
-Object.defineProperty(exports, "getAttribute", {
+Object.defineProperty(exports, "getNextSibling", {
   enumerable: true,
   get: function get() {
-    return _getAttribute.default;
+    return _getNextSibling.default;
   }
 });
-Object.defineProperty(exports, "removeAttribute", {
+Object.defineProperty(exports, "getNonce", {
   enumerable: true,
   get: function get() {
-    return _removeAttribute.default;
-  }
-});
-Object.defineProperty(exports, "setStyle", {
-  enumerable: true,
-  get: function get() {
-    return _setStyle.default;
+    return _getNonce.default;
   }
 });
 Object.defineProperty(exports, "insertAfter", {
@@ -54,34 +60,28 @@ Object.defineProperty(exports, "insertBefore", {
     return _insertBefore.default;
   }
 });
-Object.defineProperty(exports, "getNextSibling", {
+Object.defineProperty(exports, "removeAttribute", {
   enumerable: true,
   get: function get() {
-    return _getNextSibling.default;
+    return _removeAttribute.default;
   }
 });
-Object.defineProperty(exports, "getChildren", {
+Object.defineProperty(exports, "selectNodesWithEq", {
   enumerable: true,
   get: function get() {
-    return _getChildren.default;
+    return _selectNodesWithEq.selectNodesWithEq;
   }
 });
-Object.defineProperty(exports, "getChildNodes", {
+Object.defineProperty(exports, "setAttribute", {
   enumerable: true,
   get: function get() {
-    return _getChildNodes.default;
+    return _setAttribute.default;
   }
 });
-Object.defineProperty(exports, "getFirstChild", {
+Object.defineProperty(exports, "setStyle", {
   enumerable: true,
   get: function get() {
-    return _getFirstChild.default;
-  }
-});
-Object.defineProperty(exports, "getNonce", {
-  enumerable: true,
-  get: function get() {
-    return _getNonce.default;
+    return _setStyle.default;
   }
 });
 

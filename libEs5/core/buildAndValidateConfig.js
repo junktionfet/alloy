@@ -17,7 +17,7 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-var CONFIG_DOC_URI = "https://adobe.ly/2M4ErNE";
+var CONFIG_DOC_URI = "https://adobe.ly/3sHh553";
 
 var buildSchema = function buildSchema(coreConfigValidators, componentCreators) {
   var schema = {};

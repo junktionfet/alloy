@@ -1,6 +1,6 @@
 "use strict";
 
-exports.default = exports.awaitUsingTimer = exports.awaitUsingRequestAnimation = exports.canUseRequestAnimationFrame = exports.awaitUsingMutationObserver = exports.canUseMutationObserver = void 0;
+exports.default = exports.canUseRequestAnimationFrame = exports.canUseMutationObserver = exports.awaitUsingTimer = exports.awaitUsingRequestAnimation = exports.awaitUsingMutationObserver = void 0;
 
 var _isFunction = require("../isFunction");
 

@@ -1,6 +1,6 @@
 "use strict";
 
-exports.ADOBE_EDGE = exports.RETRY_AFTER = void 0;
+exports.RETRY_AFTER = exports.ADOBE_EDGE = void 0;
 
 /*
 Copyright 2021 Adobe. All rights reserved.

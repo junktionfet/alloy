@@ -9,7 +9,7 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-const COMMAND_DOC_URI = "https://adobe.ly/2UH0qO7";
+const COMMAND_DOC_URI = "https://adobe.ly/3sHgQHb";
 export default (({
   command,
   options

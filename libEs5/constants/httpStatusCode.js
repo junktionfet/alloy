@@ -1,6 +1,6 @@
 "use strict";
 
-exports.GATEWAY_TIMEOUT = exports.SERVICE_UNAVAILABLE = exports.BAD_GATEWAY = exports.TOO_MANY_REQUESTS = exports.NO_CONTENT = void 0;
+exports.TOO_MANY_REQUESTS = exports.SERVICE_UNAVAILABLE = exports.NO_CONTENT = exports.GATEWAY_TIMEOUT = exports.BAD_GATEWAY = void 0;
 
 /*
 Copyright 2020 Adobe. All rights reserved.

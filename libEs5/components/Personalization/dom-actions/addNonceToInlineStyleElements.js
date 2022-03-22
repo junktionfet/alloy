@@ -6,6 +6,8 @@ var _dom = require("../../../utils/dom");
 
 var _tagName = require("../../../constants/tagName");
 
+var _elementAttribute = require("../../../constants/elementAttribute");
+
 var _dom2 = require("./dom");
 
 /*
@@ -24,7 +26,7 @@ var is = function is(element, tagName) {
 };
 
 var isInlineStyleElement = function isInlineStyleElement(element) {
-  return is(element, _tagName.STYLE) && !(0, _dom2.getAttribute)(element, _tagName.SRC);
+  return is(element, _tagName.STYLE) && !(0, _dom2.getAttribute)(element, _elementAttribute.SRC);
 };
 
 var _default = function _default(fragment) {

@@ -1,6 +1,6 @@
 "use strict";
 
-exports.CONSENT = exports.IDENTITY = void 0;
+exports.IDENTITY = exports.CONSENT = void 0;
 
 /*
 Copyright 2019 Adobe. All rights reserved.

@@ -9,15 +9,16 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import { isNonEmptyArray } from "../../utils";
-import { DOM_ACTION, REDIRECT_ITEM } from "./constants/schema";
+import { isNonEmptyArray, includes } from "../../utils";
+import { DOM_ACTION, REDIRECT_ITEM, DEFAULT_CONTENT_ITEM } from "./constants/schema";
+import { VIEW_SCOPE_TYPE } from "./constants/scopeType";
 import PAGE_WIDE_SCOPE from "./constants/scope";
 
-const splitItems = (items, schema) => {
+const splitItems = (items, schemas) => {
   const matched = [];
   const nonMatched = [];
   items.forEach(item => {
-    if (item.schema === schema) {
+    if (includes(schemas, item.schema)) {
       matched.push(item);
     } else {
       nonMatched.push(item);
@@ -35,14 +36,14 @@ const createDecision = (decision, items) => {
   };
 };
 
-const splitDecisions = (decisions, schema) => {
+const splitDecisions = (decisions, ...schemas) => {
   const matchedDecisions = [];
   const unmatchedDecisions = [];
   decisions.forEach(decision => {
     const {
       items = []
     } = decision;
-    const [matchedItems, nonMatchedItems] = splitItems(items, schema);
+    const [matchedItems, nonMatchedItems] = splitItems(items, schemas);
 
     if (isNonEmptyArray(matchedItems)) {
       matchedDecisions.push(createDecision(decision, matchedItems));
@@ -58,42 +59,53 @@ const splitDecisions = (decisions, schema) => {
   };
 };
 
-const extractDecisionsByScope = (decisions, scope) => {
+const appendScopeDecision = (scopeDecisions, decision) => {
+  if (!scopeDecisions[decision.scope]) {
+    scopeDecisions[decision.scope] = [];
+  }
+
+  scopeDecisions[decision.scope].push(decision);
+};
+
+const isViewScope = scopeDetails => scopeDetails.characteristics && scopeDetails.characteristics.scopeType && scopeDetails.characteristics.scopeType === VIEW_SCOPE_TYPE;
+
+const extractDecisionsByScope = decisions => {
   const pageWideScopeDecisions = [];
-  const nonPageWideScopeDecisions = {};
+  const nonPageWideScopeDecisions = [];
+  const viewScopeDecisions = {};
 
   if (isNonEmptyArray(decisions)) {
     decisions.forEach(decision => {
-      if (decision.scope === scope) {
+      if (decision.scope === PAGE_WIDE_SCOPE) {
         pageWideScopeDecisions.push(decision);
+      } else if (isViewScope(decision.scopeDetails)) {
+        appendScopeDecision(viewScopeDecisions, decision);
       } else {
-        if (!nonPageWideScopeDecisions[decision.scope]) {
-          nonPageWideScopeDecisions[decision.scope] = [];
-        }
-
-        nonPageWideScopeDecisions[decision.scope].push(decision);
+        nonPageWideScopeDecisions.push(decision);
       }
     });
   }
 
   return {
     pageWideScopeDecisions,
-    nonPageWideScopeDecisions
+    nonPageWideScopeDecisions,
+    viewScopeDecisions
   };
 };
 
 const groupDecisions = unprocessedDecisions => {
   const decisionsGroupedByRedirectItemSchema = splitDecisions(unprocessedDecisions, REDIRECT_ITEM);
-  const decisionsGroupedByDomActionSchema = splitDecisions(decisionsGroupedByRedirectItemSchema.unmatchedDecisions, DOM_ACTION);
+  const decisionsGroupedByRenderableSchemas = splitDecisions(decisionsGroupedByRedirectItemSchema.unmatchedDecisions, DOM_ACTION, DEFAULT_CONTENT_ITEM);
   const {
     pageWideScopeDecisions,
-    nonPageWideScopeDecisions
-  } = extractDecisionsByScope(decisionsGroupedByDomActionSchema.matchedDecisions, PAGE_WIDE_SCOPE);
+    nonPageWideScopeDecisions,
+    viewScopeDecisions
+  } = extractDecisionsByScope(decisionsGroupedByRenderableSchemas.matchedDecisions);
   return {
     redirectDecisions: decisionsGroupedByRedirectItemSchema.matchedDecisions,
     pageWideScopeDecisions,
-    viewDecisions: nonPageWideScopeDecisions,
-    nonAutoRenderableDecisions: decisionsGroupedByDomActionSchema.unmatchedDecisions
+    viewDecisions: viewScopeDecisions,
+    nonAutoRenderableDecisions: decisionsGroupedByRenderableSchemas.unmatchedDecisions.concat(nonPageWideScopeDecisions)
   };
 };
 

@@ -14,13 +14,11 @@ import { validateIdentityMap } from "../../utils";
 /**
  * Verifies user provided event options.
  * @param {*} options The user event options to validate
- * @param {*} logger
  * @returns {*} Validated options
  */
 
 export default (({
-  options,
-  logger
+  options
 }) => {
   const eventOptionsValidator = objectOf({
     type: string(),
@@ -33,15 +31,5 @@ export default (({
     decisionScopes: arrayOf(string()),
     datasetId: string()
   }).required();
-  const validatedOptions = eventOptionsValidator(options);
-  const {
-    type,
-    xdm
-  } = validatedOptions;
-
-  if (xdm && !xdm.eventType && !type) {
-    logger.warn("No type or xdm.eventType specified.");
-  }
-
-  return validatedOptions;
+  return eventOptionsValidator(options);
 });

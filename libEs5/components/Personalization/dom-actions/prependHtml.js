@@ -47,7 +47,7 @@ var _default = function _default(container, html) {
     i -= 1;
   }
 
-  (0, _scripts.executeInlineScripts)(container, scripts, _dom.appendNode);
+  (0, _scripts.executeInlineScripts)(container, scripts);
   return (0, _scripts.executeRemoteScripts)(scriptsUrls);
 };
 

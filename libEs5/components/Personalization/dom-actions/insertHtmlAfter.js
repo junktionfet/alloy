@@ -31,7 +31,7 @@ var _default = function _default(container, html) {
   elements.forEach(function (element) {
     (0, _dom.insertAfter)(container, element);
   });
-  (0, _scripts.executeInlineScripts)(container, scripts, _dom.insertAfter);
+  (0, _scripts.executeInlineScripts)(container, scripts);
   return (0, _scripts.executeRemoteScripts)(scriptsUrls);
 };
 

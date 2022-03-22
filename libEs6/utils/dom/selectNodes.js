@@ -9,7 +9,9 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import toArray from "../toArray";
+import querySelectorAll from "./querySelectorAll";
+import selectNodesWithShadow from "./selectNodesWithShadow";
+import isShadowSelector from "./isShadowSelector";
 /**
  * Returns an array of matched DOM nodes.
  * @param {String} selector
@@ -18,5 +20,9 @@ import toArray from "../toArray";
  */
 
 export default ((selector, context = document) => {
-  return toArray(context.querySelectorAll(selector));
+  if (!isShadowSelector(selector)) {
+    return querySelectorAll(context, selector);
+  }
+
+  return selectNodesWithShadow(context, selector);
 });

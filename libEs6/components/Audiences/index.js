@@ -11,6 +11,7 @@ governing permissions and limitations under the License.
 */
 import { fireReferrerHideableImage } from "../../utils";
 import injectProcessDestinations from "./injectProcessDestinations";
+import injectProcessResponse from "./injectProcessResponse";
 
 const createAudiences = ({
   logger
@@ -19,17 +20,12 @@ const createAudiences = ({
     fireReferrerHideableImage,
     logger
   });
-
-  const processDestinationsFromResponse = ({
-    response
-  }) => {
-    const destinations = response.getPayloadsByType("activation:push");
-    return processDestinations(destinations);
-  };
-
+  const processResponse = injectProcessResponse({
+    processDestinations
+  });
   return {
     lifecycle: {
-      onResponse: processDestinationsFromResponse
+      onResponse: processResponse
     },
     commands: {}
   };

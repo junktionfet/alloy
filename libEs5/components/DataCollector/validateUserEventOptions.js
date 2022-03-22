@@ -21,12 +21,10 @@ governing permissions and limitations under the License.
 /**
  * Verifies user provided event options.
  * @param {*} options The user event options to validate
- * @param {*} logger
  * @returns {*} Validated options
  */
 var _default = function _default(_ref) {
-  var options = _ref.options,
-      logger = _ref.logger;
+  var options = _ref.options;
   var eventOptionsValidator = (0, _validation.objectOf)({
     type: (0, _validation.string)(),
     xdm: (0, _validation.objectOf)({
@@ -38,15 +36,7 @@ var _default = function _default(_ref) {
     decisionScopes: (0, _validation.arrayOf)((0, _validation.string)()),
     datasetId: (0, _validation.string)()
   }).required();
-  var validatedOptions = eventOptionsValidator(options);
-  var type = validatedOptions.type,
-      xdm = validatedOptions.xdm;
-
-  if (xdm && !xdm.eventType && !type) {
-    logger.warn("No type or xdm.eventType specified.");
-  }
-
-  return validatedOptions;
+  return eventOptionsValidator(options);
 };
 
 exports.default = _default;

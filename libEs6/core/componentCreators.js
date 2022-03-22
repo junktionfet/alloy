@@ -17,7 +17,8 @@ import createPersonalization from "../components/Personalization";
 import createContext from "../components/Context";
 import createPrivacy from "../components/Privacy";
 import createEventMerge from "../components/EventMerge";
-import createLibraryInfo from "../components/LibraryInfo"; // TODO: Register the Components here statically for now. They might be registered differently.
+import createLibraryInfo from "../components/LibraryInfo";
+import createMachineLearning from "../components/MachineLearning"; // TODO: Register the Components here statically for now. They might be registered differently.
 // TODO: Figure out how sub-components will be made available/registered
 
-export default [createDataCollector, createActivityCollector, createIdentity, createAudiences, createPersonalization, createContext, createPrivacy, createEventMerge, createLibraryInfo];
+export default [createDataCollector, createActivityCollector, createIdentity, createAudiences, createPersonalization, createContext, createPrivacy, createEventMerge, createLibraryInfo, createMachineLearning];

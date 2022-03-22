@@ -11,7 +11,8 @@ governing permissions and limitations under the License.
 */
 import loadScript from "@adobe/reactor-load-script";
 import { selectNodes, createNode } from "../../../utils/dom";
-import { SRC, SCRIPT } from "../../../constants/tagName";
+import { SCRIPT } from "../../../constants/tagName";
+import { SRC } from "../../../constants/elementAttribute";
 import { getAttribute, getNonce } from "./dom";
 export const is = (element, tagName) => !!element && element.tagName === tagName;
 
@@ -84,8 +85,11 @@ export const getRemoteScriptsUrls = fragment => {
 
   return result;
 };
-export const executeInlineScripts = (container, scripts, func) => {
-  scripts.forEach(script => func(container, script));
+export const executeInlineScripts = (parent, scripts) => {
+  scripts.forEach(script => {
+    parent.appendChild(script);
+    parent.removeChild(script);
+  });
 };
 export const executeRemoteScripts = urls => {
   return Promise.all(urls.map(loadScript));

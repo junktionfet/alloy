@@ -2,7 +2,9 @@
 
 exports.default = void 0;
 
-var _addRenderAttemptedToDecisions = require("./utils/addRenderAttemptedToDecisions");
+var _composePersonalizationResultingObject = require("./utils/composePersonalizationResultingObject");
+
+var _utils = require("../../utils");
 
 /*
 Copyright 2020 Adobe. All rights reserved.
@@ -16,39 +18,42 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 var _default = function _default(_ref) {
-  var executeCachedViewDecisions = _ref.executeCachedViewDecisions,
-      viewCache = _ref.viewCache,
-      showContainers = _ref.showContainers;
+  var mergeDecisionsMeta = _ref.mergeDecisionsMeta,
+      collect = _ref.collect,
+      executeDecisions = _ref.executeDecisions,
+      viewCache = _ref.viewCache;
   return function (_ref2) {
     var personalizationDetails = _ref2.personalizationDetails,
-        onResponse = _ref2.onResponse,
-        onRequestFailure = _ref2.onRequestFailure;
+        event = _ref2.event,
+        onResponse = _ref2.onResponse;
     var viewName = personalizationDetails.getViewName();
-    return viewCache.getView(viewName).then(function (currentViewDecisions) {
+    return viewCache.getView(viewName).then(function (viewDecisions) {
       if (personalizationDetails.isRenderDecisions()) {
-        executeCachedViewDecisions({
-          viewName: viewName,
-          viewDecisions: currentViewDecisions
+        return executeDecisions(viewDecisions).then(function (decisionsMeta) {
+          // if there are decisions to be rendered we render them and attach the result in experience.decisions.propositions
+          if ((0, _utils.isNonEmptyArray)(decisionsMeta)) {
+            mergeDecisionsMeta(event, decisionsMeta);
+            onResponse(function () {
+              return (0, _composePersonalizationResultingObject.default)(viewDecisions, true);
+            });
+            return;
+          } // if there are no decisions in cache for this view, we will send a empty notification
+
+
+          onResponse(function () {
+            collect({
+              decisionsMeta: [],
+              viewName: viewName
+            });
+            return (0, _composePersonalizationResultingObject.default)(viewDecisions, true);
+          });
         });
       }
 
       onResponse(function () {
-        return personalizationDetails.isRenderDecisions() ? {
-          propositions: (0, _addRenderAttemptedToDecisions.default)({
-            decisions: currentViewDecisions,
-            renderAttempted: true
-          })
-        } : {
-          decisions: currentViewDecisions,
-          propositions: (0, _addRenderAttemptedToDecisions.default)({
-            decisions: currentViewDecisions,
-            renderAttempted: false
-          })
-        };
+        return (0, _composePersonalizationResultingObject.default)(viewDecisions, false);
       });
-      onRequestFailure(function () {
-        showContainers();
-      });
+      return {};
     });
   };
 };

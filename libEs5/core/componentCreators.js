@@ -20,6 +20,8 @@ var _EventMerge = require("../components/EventMerge");
 
 var _LibraryInfo = require("../components/LibraryInfo");
 
+var _MachineLearning = require("../components/MachineLearning");
+
 /*
 Copyright 2019 Adobe. All rights reserved.
 This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -33,5 +35,5 @@ governing permissions and limitations under the License.
 */
 // TODO: Register the Components here statically for now. They might be registered differently.
 // TODO: Figure out how sub-components will be made available/registered
-var _default = [_DataCollector.default, _ActivityCollector.default, _Identity.default, _Audiences.default, _Personalization.default, _Context.default, _Privacy.default, _EventMerge.default, _LibraryInfo.default];
+var _default = [_DataCollector.default, _ActivityCollector.default, _Identity.default, _Audiences.default, _Personalization.default, _Context.default, _Privacy.default, _EventMerge.default, _LibraryInfo.default, _MachineLearning.default];
 exports.default = _default;

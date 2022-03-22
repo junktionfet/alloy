@@ -36,6 +36,11 @@ var _default = function _default(store) {
     appendHtml: (0, _action.createAction)(_action.appendHtml),
     click: function click(settings) {
       return (0, _action.click)(settings, store);
+    },
+    defaultContent: function defaultContent(settings) {
+      return Promise.resolve({
+        meta: settings.meta
+      });
     }
   };
 };

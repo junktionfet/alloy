@@ -2,7 +2,7 @@
 
 exports.default = void 0;
 
-var _createRequestPayload = require("../../core/edgeNetwork/requests/createRequestPayload");
+var _request = require("../../utils/request");
 
 /*
 Copyright 2019 Adobe. All rights reserved.
@@ -17,7 +17,7 @@ governing permissions and limitations under the License.
 */
 var _default = function _default() {
   var content = {};
-  var payload = (0, _createRequestPayload.default)({
+  var payload = (0, _request.createRequestPayload)({
     content: content,
     addIdentity: function addIdentity(namespaceCode, identity) {
       content.identityMap = content.identityMap || {};

@@ -10,8 +10,6 @@ var _domActions = require("./dom-actions");
 
 var _createCollect = require("./createCollect");
 
-var _createViewCollect = require("./createViewCollect");
-
 var _createExecuteDecisions = require("./createExecuteDecisions");
 
 var _flicker = require("./flicker");
@@ -25,8 +23,6 @@ var _isAuthoringModeEnabled = require("./utils/isAuthoringModeEnabled");
 var _event = require("./event");
 
 var _createOnClickHandler = require("./createOnClickHandler");
-
-var _createExecuteCachedViewDecisions = require("./createExecuteCachedViewDecisions");
 
 var _createViewCacheManager = require("./createViewCacheManager");
 
@@ -63,10 +59,6 @@ var createPersonalization = function createPersonalization(_ref) {
     eventManager: eventManager,
     mergeDecisionsMeta: _event.mergeDecisionsMeta
   });
-  var viewCollect = (0, _createViewCollect.default)({
-    eventManager: eventManager,
-    mergeDecisionsMeta: _event.mergeDecisionsMeta
-  });
 
   var _createClickStorage = (0, _createClickStorage2.default)(),
       getClickMetasBySelector = _createClickStorage.getClickMetasBySelector,
@@ -78,14 +70,7 @@ var createPersonalization = function createPersonalization(_ref) {
   var executeDecisions = (0, _createExecuteDecisions.default)({
     modules: modules,
     logger: logger,
-    executeActions: _domActions.executeActions,
-    collect: collect
-  });
-  var executeViewDecisions = (0, _createExecuteDecisions.default)({
-    modules: modules,
-    logger: logger,
-    executeActions: _domActions.executeActions,
-    collect: viewCollect
+    executeActions: _domActions.executeActions
   });
   var handleRedirectDecisions = (0, _createRedirectHandler.default)({
     collect: collect,
@@ -93,16 +78,11 @@ var createPersonalization = function createPersonalization(_ref) {
     logger: logger,
     showContainers: _flicker.showContainers
   });
-  var executeCachedViewDecisions = (0, _createExecuteCachedViewDecisions.default)({
-    viewCache: viewCache,
-    executeViewDecisions: executeViewDecisions,
-    collect: viewCollect
-  });
   var autoRenderingHandler = (0, _createAutoRenderingHandler.default)({
     viewCache: viewCache,
     executeDecisions: executeDecisions,
-    executeCachedViewDecisions: executeCachedViewDecisions,
-    showContainers: _flicker.showContainers
+    showContainers: _flicker.showContainers,
+    collect: collect
   });
   var nonRenderingHandler = (0, _createNonRenderingHandler.default)({
     viewCache: viewCache
@@ -117,7 +97,6 @@ var createPersonalization = function createPersonalization(_ref) {
   var fetchDataHandler = (0, _createFetchDataHandler.default)({
     config: config,
     responseHandler: responseHandler,
-    showContainers: _flicker.showContainers,
     hideContainers: _flicker.hideContainers,
     mergeQuery: _event.mergeQuery
   });
@@ -128,9 +107,10 @@ var createPersonalization = function createPersonalization(_ref) {
     getClickMetasBySelector: getClickMetasBySelector
   });
   var viewChangeHandler = (0, _createViewChangeHandler.default)({
-    executeCachedViewDecisions: executeCachedViewDecisions,
-    viewCache: viewCache,
-    showContainers: _flicker.showContainers
+    mergeDecisionsMeta: _event.mergeDecisionsMeta,
+    collect: collect,
+    executeDecisions: executeDecisions,
+    viewCache: viewCache
   });
   return (0, _createComponent.default)({
     logger: logger,
@@ -139,7 +119,8 @@ var createPersonalization = function createPersonalization(_ref) {
     onClickHandler: onClickHandler,
     isAuthoringModeEnabled: _isAuthoringModeEnabled.default,
     mergeQuery: _event.mergeQuery,
-    viewCache: viewCache
+    viewCache: viewCache,
+    showContainers: _flicker.showContainers
   });
 };
 

@@ -12,7 +12,6 @@ governing permissions and limitations under the License.
 export default (({
   config,
   responseHandler,
-  showContainers,
   hideContainers,
   mergeQuery
 }) => {
@@ -20,8 +19,7 @@ export default (({
     decisionsDeferred,
     personalizationDetails,
     event,
-    onResponse,
-    onRequestFailure
+    onResponse
   }) => {
     const {
       prehidingStyle
@@ -39,9 +37,5 @@ export default (({
       personalizationDetails,
       response
     }));
-    onRequestFailure(() => {
-      decisionsDeferred.reject();
-      showContainers();
-    });
   };
 });

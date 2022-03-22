@@ -12,17 +12,15 @@ governing permissions and limitations under the License.
 import validateUserEventOptions from "./validateUserEventOptions";
 
 const createDataCollector = ({
-  eventManager,
-  logger
+  eventManager
 }) => {
   return {
     commands: {
       sendEvent: {
-        documentationUri: "https://adobe.ly/2r0uUjh",
+        documentationUri: "https://adobe.ly/3GQ3Q7t",
         optionsValidator: options => {
           return validateUserEventOptions({
-            options,
-            logger
+            options
           });
         },
         run: options => {

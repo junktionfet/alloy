@@ -2,7 +2,7 @@
 
 exports.default = void 0;
 
-var _tagName = require("../../../constants/tagName");
+var _elementAttribute = require("../../../constants/elementAttribute");
 
 var _dom = require("./dom");
 
@@ -27,9 +27,9 @@ var _default = function _default(container, url) {
 
   (0, _images.loadImage)(url); // Remove "src" so there is no flicker
 
-  (0, _dom.removeAttribute)(container, _tagName.SRC); // Replace the image "src"
+  (0, _dom.removeAttribute)(container, _elementAttribute.SRC); // Replace the image "src"
 
-  (0, _dom.setAttribute)(container, _tagName.SRC, url);
+  (0, _dom.setAttribute)(container, _elementAttribute.SRC, url);
 };
 
 exports.default = _default;

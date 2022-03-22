@@ -9,20 +9,36 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
+import { DISPLAY } from "./constants/eventType";
+import { isNonEmptyArray } from "../../utils";
 export default (({
   eventManager,
   mergeDecisionsMeta
 }) => {
-  // Called when a decision is auto-rendered for the __view__ scope (non-SPA view).
+  // Called when a decision is auto-rendered for the __view__ scope or a SPA view(display and empty display notification)
   return ({
-    decisionsMeta,
-    documentMayUnload = false
+    decisionsMeta = [],
+    documentMayUnload = false,
+    viewName
   }) => {
     const event = eventManager.createEvent();
-    event.mergeXdm({
-      eventType: "display"
-    });
-    mergeDecisionsMeta(event, decisionsMeta);
+    const data = {
+      eventType: DISPLAY
+    };
+
+    if (viewName) {
+      data.web = {
+        webPageDetails: {
+          viewName
+        }
+      };
+    }
+
+    if (isNonEmptyArray(decisionsMeta)) {
+      mergeDecisionsMeta(event, decisionsMeta);
+    }
+
+    event.mergeXdm(data);
 
     if (documentMayUnload) {
       event.documentMayUnload();

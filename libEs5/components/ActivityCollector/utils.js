@@ -1,6 +1,6 @@
 "use strict";
 
-exports.isExitLink = exports.isDownloadLink = exports.isSupportedAnchorElement = exports.getAbsoluteUrlFromAnchorElement = exports.urlStartsWithScheme = void 0;
+exports.urlStartsWithScheme = exports.isSupportedAnchorElement = exports.isExitLink = exports.isDownloadLink = exports.getAbsoluteUrlFromAnchorElement = void 0;
 
 /*
 Copyright 2019 Adobe. All rights reserved.

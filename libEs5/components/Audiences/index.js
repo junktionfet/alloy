@@ -6,6 +6,8 @@ var _utils = require("../../utils");
 
 var _injectProcessDestinations = require("./injectProcessDestinations");
 
+var _injectProcessResponse = require("./injectProcessResponse");
+
 /*
 Copyright 2019 Adobe. All rights reserved.
 This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -23,16 +25,12 @@ var createAudiences = function createAudiences(_ref) {
     fireReferrerHideableImage: _utils.fireReferrerHideableImage,
     logger: logger
   });
-
-  var processDestinationsFromResponse = function processDestinationsFromResponse(_ref2) {
-    var response = _ref2.response;
-    var destinations = response.getPayloadsByType("activation:push");
-    return processDestinations(destinations);
-  };
-
+  var processResponse = (0, _injectProcessResponse.default)({
+    processDestinations: processDestinations
+  });
   return {
     lifecycle: {
-      onResponse: processDestinationsFromResponse
+      onResponse: processResponse
     },
     commands: {}
   };

@@ -6,6 +6,8 @@ var _dom = require("../../../utils/dom");
 
 var _tagName = require("../../../constants/tagName");
 
+var _elementAttribute = require("../../../constants/elementAttribute");
+
 var _dom2 = require("./dom");
 
 /*
@@ -36,7 +38,7 @@ exports.loadImage = loadImage;
 var loadImages = function loadImages(fragment) {
   var images = (0, _dom.selectNodes)(_tagName.IMG, fragment);
   images.forEach(function (image) {
-    var url = (0, _dom2.getAttribute)(image, _tagName.SRC);
+    var url = (0, _dom2.getAttribute)(image, _elementAttribute.SRC);
 
     if (url) {
       loadImage(url);

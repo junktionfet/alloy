@@ -9,6 +9,7 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
+export const DEFAULT_CONTENT_ITEM = "https://ns.adobe.com/personalization/default-content-item";
 export const DOM_ACTION = "https://ns.adobe.com/personalization/dom-action";
 export const HTML_CONTENT_ITEM = "https://ns.adobe.com/personalization/html-content-item";
 export const JSON_CONTENT_ITEM = "https://ns.adobe.com/personalization/json-content-item";

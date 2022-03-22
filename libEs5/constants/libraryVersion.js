@@ -15,5 +15,5 @@ governing permissions and limitations under the License.
 */
 // The __VERSION__ keyword will be replace at alloy build time with the package.json version.
 // see babel-plugin-version
-var _default = "2.6.4";
+var _default = "2.9.0";
 exports.default = _default;

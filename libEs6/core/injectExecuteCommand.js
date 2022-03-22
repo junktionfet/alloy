@@ -33,7 +33,7 @@ export default (({
 
       executor = () => {
         configurePromise = configureCommand(options);
-          return configurePromise.then(() => {// Don't expose internals to the user.
+        return configurePromise.then(() => {// Don't expose internals to the user.
         });
       };
     } else {

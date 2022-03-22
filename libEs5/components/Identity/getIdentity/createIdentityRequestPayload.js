@@ -2,9 +2,7 @@
 
 exports.default = void 0;
 
-var _createRequestPayload = require("../../../core/edgeNetwork/requests/createRequestPayload");
-
-var _createAddIdentity = require("../../../core/edgeNetwork/requests/contentModifiers/createAddIdentity");
+var _request = require("../../../utils/request");
 
 /*
 Copyright 2020 Adobe. All rights reserved.
@@ -25,9 +23,9 @@ var _default = function _default(namespaces) {
       }
     }
   };
-  return (0, _createRequestPayload.default)({
+  return (0, _request.createRequestPayload)({
     content: content,
-    addIdentity: (0, _createAddIdentity.default)(content)
+    addIdentity: (0, _request.createAddIdentity)(content)
   });
 };
 

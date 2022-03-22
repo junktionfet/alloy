@@ -9,7 +9,8 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import { assign, flatMap, isNonEmptyArray } from "../../utils";
+import { assign, flatMap } from "../../utils";
+const DEFAULT_ACTION_TYPE = "defaultContent";
 
 const identity = item => item;
 
@@ -19,12 +20,14 @@ const buildActions = decision => {
     scope: decision.scope,
     scopeDetails: decision.scopeDetails
   };
-  return decision.items.map(item => assign({}, item.data, {
+  return decision.items.map(item => assign({
+    type: DEFAULT_ACTION_TYPE
+  }, item.data, {
     meta
   }));
 };
 
-const processMetas = (collect, logger, actionResults) => {
+const processMetas = (logger, actionResults) => {
   const results = flatMap(actionResults, identity);
   const finalMetas = [];
   const set = new Set();
@@ -50,27 +53,20 @@ const processMetas = (collect, logger, actionResults) => {
     set.add(meta.id);
     finalMetas.push(meta);
   });
-
-  if (isNonEmptyArray(finalMetas)) {
-    // collect here can either be the function from createCollect or createViewCollect.
-    collect({
-      decisionsMeta: finalMetas
-    });
-  }
+  return finalMetas;
 };
 
 export default (({
   modules,
   logger,
-  executeActions,
-  collect
+  executeActions
 }) => {
   return decisions => {
     const actionResultsPromises = decisions.map(decision => {
       const actions = buildActions(decision);
       return executeActions(actions, modules, logger);
     });
-    return Promise.all(actionResultsPromises).then(results => processMetas(collect, logger, results)).catch(error => {
+    return Promise.all(actionResultsPromises).then(results => processMetas(logger, results)).catch(error => {
       logger.error(error);
     });
   };

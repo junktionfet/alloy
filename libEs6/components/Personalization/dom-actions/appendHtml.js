@@ -24,6 +24,6 @@ export default ((container, html) => {
   elements.forEach(element => {
     appendNode(container, element);
   });
-  executeInlineScripts(container, scripts, appendNode);
+  executeInlineScripts(container, scripts);
   return executeRemoteScripts(scriptsUrls);
 });

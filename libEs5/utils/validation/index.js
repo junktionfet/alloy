@@ -1,6 +1,6 @@
 "use strict";
 
-exports.enumOf = exports.string = exports.objectOf = exports.mapOfValues = exports.number = exports.literal = exports.callback = exports.boolean = exports.arrayOf = exports.anything = exports.anyOf = void 0;
+exports.string = exports.objectOf = exports.number = exports.mapOfValues = exports.literal = exports.enumOf = exports.callback = exports.boolean = exports.arrayOf = exports.anything = exports.anyOf = void 0;
 
 var _chain = require("./chain");
 

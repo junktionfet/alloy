@@ -48,7 +48,7 @@ var _default = function _default(_ref) {
         scopes.push(_scope.default);
       }
 
-      var schemas = [_schema.HTML_CONTENT_ITEM, _schema.JSON_CONTENT_ITEM, _schema.REDIRECT_ITEM];
+      var schemas = [_schema.DEFAULT_CONTENT_ITEM, _schema.HTML_CONTENT_ITEM, _schema.JSON_CONTENT_ITEM, _schema.REDIRECT_ITEM];
 
       if ((0, _utils.includes)(scopes, _scope.default)) {
         schemas.push(_schema.DOM_ACTION);

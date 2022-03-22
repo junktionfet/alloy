@@ -1,6 +1,6 @@
 "use strict";
 
-exports.HEAD = exports.SRC = exports.SCRIPT = exports.STYLE = exports.DIV = exports.IMG = exports.IFRAME = exports.BODY = void 0;
+exports.STYLE = exports.SCRIPT = exports.IMG = exports.IFRAME = exports.HEAD = exports.DIV = exports.BODY = void 0;
 
 /*
 Copyright 2019 Adobe. All rights reserved.
@@ -25,7 +25,5 @@ var STYLE = "STYLE";
 exports.STYLE = STYLE;
 var SCRIPT = "SCRIPT";
 exports.SCRIPT = SCRIPT;
-var SRC = "src";
-exports.SRC = SRC;
 var HEAD = "HEAD";
 exports.HEAD = HEAD;

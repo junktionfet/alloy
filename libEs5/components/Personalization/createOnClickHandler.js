@@ -4,6 +4,10 @@ exports.default = void 0;
 
 var _utils = require("../../utils");
 
+var _eventType = require("./constants/eventType");
+
+var _scope = require("./constants/scope");
+
 /*
 Copyright 2020 Adobe. All rights reserved.
 This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -30,9 +34,20 @@ var _default = function _default(_ref) {
       var decisionsMeta = collectClicks(clickedElement, selectors, getClickMetasBySelector);
 
       if ((0, _utils.isNonEmptyArray)(decisionsMeta)) {
-        event.mergeXdm({
-          eventType: "click"
-        });
+        var xdm = {
+          eventType: _eventType.INTERACT
+        };
+        var scope = decisionsMeta[0].scope;
+
+        if (scope !== _scope.default) {
+          xdm.web = {
+            webPageDetails: {
+              viewName: scope
+            }
+          };
+        }
+
+        event.mergeXdm(xdm);
         mergeDecisionsMeta(event, decisionsMeta);
       }
     }
